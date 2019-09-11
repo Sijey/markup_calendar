@@ -1,0 +1,44 @@
+$size: 100px;
+$week: ("mon", "tue", "wed", "thu", "fri", "sat", "sun");
+$i: 1;
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, $size);
+  justify-content: center;
+  grid-gap: 1px;
+  
+  @for $i from 1 to 31 {
+    div:nth-child(#{$i}) {
+      height: $size;
+      width: $size;
+      border: 1px solid black;
+      text-align: center;
+      line-height: $size;
+      font-family: Arial;
+      font-size: 30px;
+      background-color: #eeeeee;
+      box-sizing: border-box;
+      transition: background-color 0.5s;
+      cursor: 0.5s;
+      transform: 0.5s;
+    }
+    
+    div:nth-child(#{$i})::after {
+      content: "#{$i}";
+    }
+    
+    div:nth-child(#{$i}):hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+      cursor: pointer;
+    }
+  }
+}
+
+@each $day in $week {
+  .calendar-#{$day} > div:nth-child(1){
+    grid-column-start: (#{$i});
+  }
+  $i : $i + 1;
+}
