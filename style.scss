@@ -34,11 +34,18 @@ $i: 1;
       cursor: pointer;
     }
   }
-}
-
-@each $day in $week {
-  .calendar-#{$day} > div:nth-child(1){
-    grid-column-start: (#{$i});
+  
+  @for $i from 28 through 31 {
+    &-#{$i} :nth-child(n+#{$i+1}) {
+      display: none;
+    }
   }
-  $i : $i + 1;
 }
+  
+  @each $day in $week {
+    .calendar-#{$day} > div:nth-child(1) {
+      grid-column-start: (#{$i});
+    }
+    $i: $i + 1;
+  }
+
